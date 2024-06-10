@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PDC03MOD05.MainPage" Title="Forms and Settings">
+
+    <StackLayout>
+
+        <Switch x:Name="actionswitch" IsToggled="True" >
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonState">
+                   
+                    <VisualState x:Name="On">
+                        <VisualState.Setters>
+                            <Setter Property="ThumbColor" Value="Red"/>
+                            <Setter Property="OnColor" Value="Black"/>
+                        </VisualState.Setters>
+                    </VisualState>
+
+
+                    <VisualState x:Name="Off">
+                        <VisualState.Setters>
+                            <Setter Property="ThumbColor" Value="Blue"/>
+                            <Setter Property="OnColor" Value="Gray"/>
+                        </VisualState.Setters>
+                    </VisualState>
+
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            
+        </Switch>
+        <Label Text="Off" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label.Triggers>
+                <DataTrigger TargetType="Label" 
+                             Binding="{Binding Source={x:Reference actionswitch},
+                                Path=IsToggled}" Value="true">
+                    <Setter Property="Text" Value="On"/>
+                    <Setter Property="TextColor" Value="Red"/>
+                </DataTrigger>
+            </Label.Triggers>
+            
+        </Label>
+
+        <Entry IsEnabled="True"  VerticalOptions="Center">
+            <Entry.Triggers>
+                <DataTrigger TargetType="Entry" 
+                             Binding="{Binding Source={x:Reference actionswitch},
+                                Path=IsToggled}" Value="true">
+                    <Setter Property="IsEnabled" Value="False"/>
+                   
+                </DataTrigger>
+            </Entry.Triggers>
+
+        </Entry>
+
+        <Picker Title="Animals" TitleColor="Red" VerticalOptions="CenterAndExpand">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Dog</x:String>
+                    <x:String>Cat</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+            
+        </Picker>
+
+        <DatePicker Format="D" DateSelected="OnDateSelected" x:Name="birthDatePicker"/>
+        <Label x:Name="result" FontAttributes="Bold"/>
+
+    </StackLayout>
+
+</ContentPage>
